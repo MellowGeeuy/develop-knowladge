@@ -153,6 +153,8 @@
   --gutter: 1.5rem;
   --topbar-h: 4rem;
   --sidebar-w: 16.5rem;
+  /* แถบเมนูตอนหุบกว้างเท่าชิ้นบนแกนซ้ายพอดี จุดของแต่ละบทจึงตรงกับโลโก้บนแถบบน (กว้าง 32px เท่ากัน) */
+  --sidebar-rail-w: var(--control-sm);
   --toc-w: 14rem;
   --prose-max: 45rem;
 

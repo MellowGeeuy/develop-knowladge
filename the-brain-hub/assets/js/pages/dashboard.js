@@ -177,7 +177,7 @@ async function init() {
     trigger: document.getElementById('search-trigger'),
     getEntries: () => searchEntries(items),
     placeholder: 'ค้นหาภาษาหรือบทเรียนจากทุกภาษา',
-    hint: 'ค้นได้ทั้งชื่อภาษา ชื่อบท และคำสำคัญ เช่น closure, promise, ตัวแปร',
+    hint: 'ค้นได้ทั้งชื่อภาษา ชื่อบท และคำสำคัญ เช่น closure, generics, ตัวแปร',
   });
 }
 

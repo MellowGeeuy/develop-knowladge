@@ -122,6 +122,7 @@ async function init() {
 
   const nav = createCourseNav({
     container: document.getElementById('course-sidebar'),
+    layout,
     toggle: document.getElementById('course-menu-toggle'),
     scrim: document.getElementById('course-scrim'),
     course,
@@ -276,11 +277,18 @@ async function init() {
   });
   nav.updateProgress(readMap());
 
-  // ← → เปลี่ยนบท แต่ไม่แย่งปุ่มลูกศรจากช่องพิมพ์ กล่องโค้ดที่เลื่อนแนวนอน หรือหน้าต่างค้นหา
+  // [ หุบหรือกางเมนู · ← → เปลี่ยนบท แต่ไม่แย่งปุ่มจากช่องพิมพ์ กล่องโค้ดที่เลื่อนแนวนอน หรือหน้าต่างค้นหา
+  // [ ดูจาก event.code (ตำแหน่งปุ่ม) เพราะตอนเปิดแป้นภาษาไทย event.key ของปุ่มเดียวกันคือ "บ"
   document.addEventListener('keydown', (event) => {
-    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    const isMenuKey = event.code === 'BracketLeft';
+    if (!isMenuKey && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
     if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-    if (isTyping(event.target) || event.target.closest?.('pre, .table-wrap') || document.querySelector('dialog[open]')) return;
+    if (isTyping(event.target) || document.querySelector('dialog[open]')) return;
+    if (isMenuKey) {
+      if (nav.toggleCollapsed()) event.preventDefault();
+      return;
+    }
+    if (event.target.closest?.('pre, .table-wrap')) return;
     const lesson = state.lessonId ? course.lessonById.get(state.lessonId) : null;
     const target = event.key === 'ArrowLeft' ? lesson?.prev : lesson?.next;
     if (!target) return;
@@ -288,11 +296,15 @@ async function init() {
     window.location.hash = target.id;
   });
 
+  // ตัวอย่างคำค้นมาจากคำสำคัญของบทในคอร์สนั้นเอง ทุกภาษาจึงได้ตัวอย่างที่ค้นเจอจริง
+  const sampleKeywords = [0.35, 0.65, 0.05]
+    .map((position) => course.lessons[Math.floor(course.lessons.length * position)]?.keywords?.[0])
+    .filter(Boolean);
   initSearchDialog({
     trigger: document.getElementById('search-trigger'),
     getEntries: () => searchEntries(course),
     placeholder: `ค้นหาในคอร์ส ${language.name}`,
-    hint: 'ค้นได้ทั้งชื่อบท หัวข้อย่อยในบท และคำสำคัญ เช่น closure, promise, ตัวแปร',
+    hint: `ค้นได้ทั้งชื่อบท หัวข้อย่อยในบท และคำสำคัญ${sampleKeywords.length ? ` เช่น ${sampleKeywords.join(', ')}` : ''}`,
   });
 }
 

@@ -1,6 +1,7 @@
 /* ==========================================================================
    Course — layout ของหน้าคอร์สทุกภาษา (ทุกภาษาใช้ไฟล์นี้ผ่าน templates/course-page.html)
    3 คอลัมน์: รายการบท 264 · เนื้อหา 720 · หัวข้อในบท 224 (รวมช่องไฟ = --container-wide-max)
+   หุบรายการบทแล้วเหลือแถบ 32 คอลัมน์เนื้อหากว้างขึ้นและบทความอยู่กลางคอลัมน์ (สถานะอยู่ที่ data-sidebar)
    สีทั้งหมดมาจาก --accent ของ <html data-language> จึงเป็นสีโลโก้ของภาษานั้นเอง
    ========================================================================== */
 
@@ -65,11 +66,17 @@
   transform: scaleX(var(--progress, 0));
 }
 
-/* ---- Sidebar ---- */
+/* ---- Sidebar ----
+   ทุกชิ้นบนแกนซ้าย (ปุ่มหุบ วงความคืบหน้า ภาพรวม ระดับ จุดของบท) กว้าง --control-sm เท่ากัน
+   และตรงแนวกับโลโก้บนแถบบน ตอนหุบ (จอกว้างเท่านั้น) จึงเหลือแกนเดียวโดยไม่มีชิ้นไหนขยับออกจากแนว */
 .course-sidebar {
   position: sticky;
-  top: calc(var(--topbar-h) + var(--space-6));
+  top: calc(var(--topbar-h) + var(--space-6) - var(--space-1));
   max-height: calc(100dvh - var(--topbar-h) - var(--space-12));
+  /* กล่องเลื่อนกว้างออกไปข้างละ 4px ให้วง focus ของชิ้นที่ชิดขอบไม่ถูกตัด เนื้อในยังตรงขอบคอลัมน์เท่าเดิม */
+  margin: calc(var(--space-1) * -1);
+  padding: var(--space-1);
+  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
@@ -80,45 +87,128 @@
   gap: var(--space-6);
 }
 
-.course-nav__overview {
-  display: flex;
+.course-nav__head {
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* แถวทุกแบบในเมนูใช้คอลัมน์ชุดเดียวกัน: แกนซ้าย 32px + ข้อความ
+   --label-w ถูกตั้งจาก JS เฉพาะตอนกำลังหุบหรือกาง ชื่อบทจึงไม่ตัดบรรทัดใหม่ระหว่างที่คอลัมน์เปลี่ยนความกว้าง */
+.course-nav__row,
+.course-nav__link,
+.course-nav__level-head {
+  display: grid;
+  grid-template-columns: var(--control-sm) var(--label-w, minmax(0, 1fr));
+  column-gap: var(--space-3);
   align-items: center;
-  gap: var(--space-2);
-  height: var(--control-md);
-  padding-inline: var(--space-3);
+}
+
+.course-nav__icon {
+  display: grid;
+  place-items: center;
+  width: var(--control-sm);
+  height: var(--control-sm);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-sm);
-  font-weight: var(--weight-semibold);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.course-nav__toggle {
+  width: 100%;
+  height: var(--control-sm);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
   font-size: var(--text-sm);
   line-height: var(--lh-sm);
-  transition: background-color var(--duration-fast) var(--ease-out);
+  text-align: start;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
-.course-nav__overview:hover {
-  background: var(--color-surface-2);
-}
-
-.course-nav__overview[aria-current="page"] {
-  background: var(--accent-soft);
-}
-
-.course-nav__progress {
-  display: grid;
-  gap: var(--space-2);
-  padding: var(--space-4);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-}
-
-.course-nav__progress-head {
+.course-nav__toggle .course-nav__label {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.course-nav__overview {
+  height: var(--control-sm);
+  border-radius: var(--radius-sm);
   color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  font-weight: var(--weight-semibold);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.course-nav__toggle:hover,
+.course-nav__overview:hover,
+.course-nav__overview[aria-current="page"] {
+  color: var(--color-text);
+}
+
+.course-nav__toggle:hover .course-nav__icon,
+.course-nav__overview:hover .course-nav__icon {
+  border-color: var(--accent-strong);
+  color: var(--color-text);
+}
+
+.course-nav__overview[aria-current="page"] .course-nav__icon {
+  border-color: var(--accent-strong);
+  background: var(--accent-soft);
+  color: var(--color-text);
+}
+
+/* วงความคืบหน้า: conic-gradient วาดส่วนที่อ่านแล้ว ::before เจาะรูตรงกลางด้วยสีพื้นของหน้า */
+.course-nav__ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--control-sm);
+  height: var(--control-sm);
+  border-radius: var(--radius-full);
+  background: conic-gradient(var(--accent-strong) calc(var(--value, 0) * 1turn), var(--color-surface-3) 0);
+}
+
+.course-nav__ring::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-width) * 3);
+  border-radius: inherit;
+  background: var(--color-bg);
+}
+
+.course-nav__ring-count {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--lh-xs);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.course-nav__progress .course-nav__label {
+  display: grid;
+}
+
+.course-nav__progress-title {
+  color: var(--color-text-subtle);
   font-size: var(--text-xs);
   line-height: var(--lh-xs);
 }
 
-.course-nav__progress-count {
+.course-nav__progress-text {
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  font-weight: var(--weight-semibold);
   font-variant-numeric: tabular-nums;
 }
 
@@ -127,20 +217,48 @@
   gap: var(--space-2);
 }
 
-.course-nav__level-title {
-  display: grid;
-  padding-inline: var(--space-3);
+.course-nav__level-head {
+  min-height: var(--control-sm);
   font-family: var(--font-display);
   font-size: var(--text-sm);
   line-height: var(--lh-sm);
   font-weight: var(--weight-semibold);
 }
 
-.course-nav__level-number {
+.course-nav__chip {
+  display: grid;
+  place-items: center;
+  width: var(--control-sm);
+  height: var(--control-sm);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-2);
   color: var(--accent-text);
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.course-nav__level.is-complete .course-nav__chip {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.course-nav__level-head .course-nav__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.course-nav__level-count {
+  flex: none;
+  color: var(--color-text-subtle);
+  font-family: var(--font-sans);
   font-size: var(--text-xs);
   line-height: var(--lh-xs);
-  letter-spacing: 0.04em;
+  font-weight: var(--weight-regular);
+  font-variant-numeric: tabular-nums;
 }
 
 .course-nav__list {
@@ -150,56 +268,208 @@
   list-style: none;
 }
 
-/* เลขบทมีความกว้างคงที่ ชื่อบททุกบรรทัดจึงเริ่มที่ขอบเดียวกัน */
+.course-nav__item {
+  position: relative;
+}
+
+/* เส้นเชื่อมจุดของบท: ::before จากขอบบนถึงกลางจุด ::after จากกลางจุดถึงขอบล่าง
+   เป็นสีภาษาเมื่อบทก่อนหน้าอ่านแล้ว เห็นเป็นเส้นทางที่เดินมาถึง · เส้นขาดระหว่างระดับ */
+.course-nav__item::before,
+.course-nav__item::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--control-sm) / 2 - var(--border-width));
+  width: calc(var(--border-width) * 2);
+  background: var(--color-border);
+  transition: background-color var(--duration-base) var(--ease-out);
+}
+
+.course-nav__item::before {
+  top: 0;
+  height: calc(var(--space-1) + var(--control-sm) / 2);
+}
+
+.course-nav__item::after {
+  top: calc(var(--space-1) + var(--control-sm) / 2);
+  bottom: 0;
+}
+
+.course-nav__item:first-child::before,
+.course-nav__item:last-child::after {
+  display: none;
+}
+
+.course-nav__item.is-prev-read::before,
+.course-nav__item.is-read::after {
+  background: var(--accent-strong);
+}
+
+/* จุดสูง 32 ในแถวที่เว้นบนล่าง 4 · ข้อความเว้นบน 4 อีกชั้น บรรทัดแรกของชื่อบทจึงอยู่กึ่งกลางจุดพอดี (20px) */
 .course-nav__link {
   position: relative;
-  display: grid;
-  grid-template-columns: var(--space-6) minmax(0, 1fr) var(--icon-sm);
-  align-items: baseline;
-  column-gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
+  align-items: start;
+  padding-block: var(--space-1);
   border-radius: var(--radius-sm);
   color: var(--color-text-muted);
   font-size: var(--text-sm);
   line-height: var(--lh-sm);
-  transition:
-    background-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
-.course-nav__link:hover {
-  background: var(--color-surface-2);
+.course-nav__link .course-nav__label {
+  padding-block: var(--space-1);
+}
+
+.course-nav__link:hover,
+.course-nav__link[aria-current="page"] {
   color: var(--color-text);
 }
 
 .course-nav__link[aria-current="page"] {
-  background: var(--accent-soft);
-  color: var(--color-text);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semibold);
 }
 
-.course-nav__link[aria-current="page"]::before {
-  content: "";
-  position: absolute;
-  top: var(--space-2);
-  bottom: var(--space-2);
-  left: 0;
-  width: calc(var(--space-1) * 0.75);
+.course-nav__node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--control-sm);
+  height: var(--control-sm);
+  border: calc(var(--border-width) * 2) solid var(--color-border-strong);
   border-radius: var(--radius-full);
-  background: var(--accent-strong);
-}
-
-.course-nav__number {
-  color: var(--color-text-subtle);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
+  line-height: var(--lh-xs);
+  font-weight: var(--weight-medium);
   font-variant-numeric: tabular-nums;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
 }
 
-.course-nav__state {
-  align-self: center;
+.course-nav__link:hover .course-nav__node {
+  border-color: var(--accent-strong);
+}
+
+.course-nav__item.is-read .course-nav__node {
+  border-color: var(--accent-strong);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* บทที่เปิดอยู่เรืองแสงด้วยสีภาษา มองเห็นได้ทั้งตอนกางและตอนหุบ */
+.course-nav__link[aria-current="page"] .course-nav__node {
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 var(--space-1) var(--accent-soft-strong);
+  color: var(--accent-text);
+  font-weight: var(--weight-bold);
+}
+
+.course-nav__item.is-read .course-nav__link[aria-current="page"] .course-nav__node {
+  color: var(--accent-ink);
+}
+
+/* แบบ stepper: บทที่อ่านแล้วแสดงเครื่องหมายถูกแทนเลขบท สถานะจึงไม่ได้บอกด้วยสีอย่างเดียว
+   (เลขบทยังอยู่ในชื่อที่ screen reader อ่านและใน tooltip ตอนหุบ) */
+.course-nav__check {
+  display: none;
+}
+
+.course-nav__item.is-read .course-nav__number {
+  display: none;
+}
+
+.course-nav__item.is-read .course-nav__check {
   display: grid;
-  color: var(--color-success);
+}
+
+/* ---- Sidebar ตอนหุบ (จอกว้างเท่านั้น จอแคบใช้ drawer) ---- */
+@media (width > 64rem) {
+  .course-layout[data-sidebar="collapsed"] {
+    grid-template-columns: var(--sidebar-rail-w) minmax(0, 1fr) var(--toc-w);
+  }
+
+  .course-layout.is-sidebar-animating {
+    transition: grid-template-columns var(--duration-slow) var(--ease-in-out);
+  }
+
+  .course-sidebar.is-rail {
+    scrollbar-width: none;
+  }
+
+  .course-sidebar.is-rail .course-nav {
+    gap: var(--space-4);
+  }
+
+  .course-sidebar.is-rail :is(.course-nav__row, .course-nav__link, .course-nav__level-head) {
+    grid-template-columns: var(--control-sm);
+  }
+
+  /* ชื่อซ่อนแบบเดียวกับ .u-visually-hidden หายจากจอแต่ screen reader ยังอ่านชื่อบทและสถานะได้ครบ */
+  .course-sidebar.is-rail .course-nav__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@media (width > 64rem) and (width <= 80rem) {
+  .course-layout[data-sidebar="collapsed"] {
+    grid-template-columns: var(--sidebar-rail-w) minmax(0, 1fr);
+  }
+}
+
+/* ---- Rail tooltip ---- ชื่อของชิ้นบนแถบแคบ JS วางตามตำแหน่งจริงของชิ้นนั้น
+   ใช้ position: fixed เพราะกล่องเลื่อนของเมนูตัดทุกอย่างที่ล้นออกด้านข้าง */
+.rail-tip {
+  position: fixed;
+  top: var(--tip-y, 0rem);
+  left: calc(var(--tip-x, 0rem) + var(--space-3));
+  z-index: var(--z-drawer);
+  max-width: 20rem;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: var(--text-xs);
+  line-height: var(--lh-xs);
+  font-weight: var(--weight-medium);
+  box-shadow: var(--shadow-card-hover);
+  pointer-events: none;
+  transform: translateY(-50%);
+  animation: rail-tip-in var(--duration-fast) var(--ease-out);
+}
+
+.rail-tip[hidden] {
+  display: none;
+}
+
+.rail-tip::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(var(--space-1) * -1);
+  width: var(--space-2);
+  height: var(--space-2);
+  background: inherit;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@keyframes rail-tip-in {
+  from {
+    opacity: 0;
+    transform: translate(calc(var(--space-1) * -1), -50%);
+  }
 }
 
 /* ---- Table of contents (ในบทนี้) ---- */
@@ -255,11 +525,14 @@
   color: var(--accent-text);
 }
 
-/* ---- Lesson ---- */
+/* ---- Lesson ----
+   บทความกว้างสูงสุด --prose-max และอยู่กลางคอลัมน์เนื้อหา ตอนหุบเมนูคอลัมน์กว้างขึ้น บทความจึงเลื่อนมาอยู่กลาง
+   (จอ 1440 ตอนกางเมนู คอลัมน์กว้าง 720 เท่าบทความพอดี ตำแหน่งจึงเหมือนเดิม) */
 .lesson {
   display: grid;
   gap: var(--space-10);
   max-width: var(--prose-max);
+  margin-inline: auto;
 }
 
 .lesson__header {
@@ -636,6 +909,7 @@
   justify-items: start;
   gap: var(--space-4);
   max-width: var(--prose-max);
+  margin-inline: auto;
   padding: var(--space-10);
   border: var(--border-width) dashed var(--color-border-strong);
   border-radius: var(--radius-xl);
@@ -693,12 +967,17 @@
     display: inline-flex;
   }
 
+  .course-nav__toggle {
+    display: none;
+  }
+
   .course-sidebar {
     position: fixed;
     inset: 0 auto 0 0;
     z-index: var(--z-drawer);
     width: min(20rem, 86vw);
     max-height: none;
+    margin: 0;
     padding: var(--space-6) var(--space-5);
     border-right: var(--border-width) solid var(--color-border);
     background: var(--color-surface);

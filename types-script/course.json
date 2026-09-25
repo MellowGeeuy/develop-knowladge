@@ -1,0 +1,242 @@
+{
+  "about": "TypeScript คือ JavaScript ที่มีระบบ type คอยตรวจโค้ดก่อนรัน คอร์สนี้ต่อยอดจากคอร์ส JavaScript พาตั้งแต่ติดตั้ง TypeScript 7 และรันไฟล์ .ts บน Node.js ไปจนถึงออกแบบ type ขั้นสูง ใช้กับ DOM และ API จริง และย้ายโปรเจกต์เดิมมาเป็น TypeScript ทุกตัวอย่างคัดลอกไปรันและตรวจด้วย tsc ได้ทันที",
+  "outcomes": [
+    "ตั้งค่าโปรเจกต์ TypeScript ตรวจ type ด้วย tsc และรันไฟล์ .ts บน Node.js ได้",
+    "ใส่ type ให้ตัวแปร ฟังก์ชัน object และ class โดยปล่อยให้ TypeScript เดา type เองเมื่อควร",
+    "แยกกรณีของข้อมูลด้วย union และ narrowing จนไม่เหลือสถานะที่เป็นไปไม่ได้",
+    "สร้าง type ที่ยืดหยุ่นด้วย generics, utility types, mapped และ conditional types",
+    "ตรวจข้อมูลจากภายนอก (API, ฟอร์ม, env) ตอนรันจริง แทนการเชื่อ type อย่างเดียว",
+    "ย้ายโปรเจกต์ JavaScript มาเป็น TypeScript ทีละขั้น ตั้ง lint และเขียนเทสต์"
+  ],
+  "levels": [
+    {
+      "id": "foundations",
+      "title": "พื้นฐาน TypeScript",
+      "summary": "ตั้งค่าโปรเจกต์ ใส่ type ให้ตัวแปร ฟังก์ชัน object และชุดค่าคงที่ แล้วให้ TypeScript ช่วยจับบั๊กก่อนรัน"
+    },
+    {
+      "id": "type-system",
+      "title": "ระบบ Type เชิงลึก",
+      "summary": "แยกกรณีด้วย union และ narrowing เขียน generics และสร้าง type ใหม่จาก type เดิมโดยไม่ต้องเขียนซ้ำ"
+    },
+    {
+      "id": "real-world",
+      "title": "TypeScript ในงานจริง",
+      "summary": "ใช้ TypeScript กับ class, decorator, module, DOM, การเรียก API และการจัดการ error"
+    },
+    {
+      "id": "professional",
+      "title": "เขียนแบบมืออาชีพ",
+      "summary": "รันบน Node.js ตั้งค่าเข้มงวด ต่อ lint เขียนเทสต์ ย้ายโปรเจกต์เดิม และเลี่ยงรูปแบบที่ทำให้ type โกหก"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "what-is-typescript",
+      "level": "foundations",
+      "title": "TypeScript คืออะไร และทำงานอย่างไร",
+      "summary": "TypeScript เพิ่มอะไรให้ JavaScript ตรวจโค้ดก่อนรันอย่างไร และทำไม type ถึงหายไปตอนโค้ดทำงานจริง",
+      "keywords": ["typescript", "tsc", "type checker", "static typing", "superset", "type erasure", "type stripping", "typescript 7", "playground"],
+      "minutes": 12,
+      "file": "lessons/01-what-is-typescript.md"
+    },
+    {
+      "id": "setup-and-tsconfig",
+      "level": "foundations",
+      "title": "ติดตั้งและตั้งค่าโปรเจกต์",
+      "summary": "สร้างโปรเจกต์ด้วย npm ตั้งค่า tsconfig.json ให้เข้มงวด ใช้ tsc ตรวจ type และให้ Node.js รันไฟล์ .ts",
+      "keywords": ["tsconfig", "tsconfig.json", "tsc", "tsc --init", "npm", "strict", "noemit", "nodenext", "types", "@types/node", "watch"],
+      "minutes": 16,
+      "file": "lessons/02-setup-and-tsconfig.md"
+    },
+    {
+      "id": "basic-types",
+      "level": "foundations",
+      "title": "Type พื้นฐานและ Type Inference",
+      "summary": "ใส่ type เองกับให้ TypeScript เดาเองต่างกันอย่างไร type พื้นฐาน array tuple literal และ any, unknown, never",
+      "keywords": ["type annotation", "type inference", "string", "number", "boolean", "array", "tuple", "literal type", "any", "unknown", "never", "null", "undefined", "as const"],
+      "minutes": 16,
+      "file": "lessons/03-basic-types.md"
+    },
+    {
+      "id": "functions",
+      "level": "foundations",
+      "title": "ฟังก์ชัน",
+      "summary": "ใส่ type ให้พารามิเตอร์และค่าที่คืน พารามิเตอร์ที่ไม่บังคับ ค่าเริ่มต้น rest, function type, callback และ overload",
+      "keywords": ["function", "parameter", "return type", "optional parameter", "default parameter", "rest parameter", "void", "function type", "callback", "overload", "arrow function"],
+      "minutes": 15,
+      "file": "lessons/04-functions.md"
+    },
+    {
+      "id": "objects-and-interfaces",
+      "level": "foundations",
+      "title": "Object, Type Alias และ Interface",
+      "summary": "กำหนดรูปร่างของ object ด้วย type และ interface property ที่ไม่บังคับ readonly, index signature และ structural typing",
+      "keywords": ["object type", "type alias", "interface", "optional property", "readonly", "index signature", "record", "structural typing", "excess property", "extends", "intersection"],
+      "minutes": 18,
+      "file": "lessons/05-objects-and-interfaces.md"
+    },
+    {
+      "id": "enums-and-literal-types",
+      "level": "foundations",
+      "title": "Enum และ Literal Type",
+      "summary": "สร้างชุดค่าคงที่ด้วย enum หรือ union ของ literal type ข้อดีข้อเสียของแต่ละแบบ และทำไม Node.js รันไฟล์ที่มี enum ตรง ๆ ไม่ได้",
+      "keywords": ["enum", "string enum", "const enum", "literal type", "union", "as const", "keyof typeof", "erasablesyntaxonly"],
+      "minutes": 14,
+      "file": "lessons/06-enums-and-literal-types.md"
+    },
+    {
+      "id": "union-and-narrowing",
+      "level": "type-system",
+      "title": "Union และ Narrowing",
+      "summary": "รวมหลาย type ด้วย union แล้วแยกกรณีด้วย typeof, in, instanceof, discriminated union และตรวจครบทุกกรณีด้วย never",
+      "keywords": ["union", "intersection", "narrowing", "typeof", "instanceof", "in", "discriminated union", "type guard", "type predicate", "assertion function", "never", "exhaustive"],
+      "minutes": 18,
+      "file": "lessons/07-union-and-narrowing.md"
+    },
+    {
+      "id": "generics",
+      "level": "type-system",
+      "title": "Generics",
+      "summary": "เขียนฟังก์ชันและ type ที่ใช้ได้กับข้อมูลหลายชนิดโดยไม่เสีย type ด้วย type parameter, constraint และค่าเริ่มต้น",
+      "keywords": ["generics", "type parameter", "constraint", "extends", "keyof", "default type", "generic function", "generic type", "const type parameter"],
+      "minutes": 18,
+      "file": "lessons/08-generics.md"
+    },
+    {
+      "id": "type-operators",
+      "level": "type-system",
+      "title": "keyof, typeof, as const และ satisfies",
+      "summary": "สร้าง type จากค่าที่มีอยู่แล้ว ดึง type ย่อยด้วย indexed access และตรวจค่าด้วย satisfies โดยไม่เสีย type ที่ละเอียด",
+      "keywords": ["keyof", "typeof", "indexed access", "as const", "satisfies", "type assertion", "as", "non-null assertion"],
+      "minutes": 16,
+      "file": "lessons/09-type-operators.md"
+    },
+    {
+      "id": "utility-types",
+      "level": "type-system",
+      "title": "Utility Types",
+      "summary": "แปลง type เดิมเป็น type ใหม่ด้วย Partial, Required, Readonly, Pick, Omit, Record, Exclude, Extract, ReturnType และ Awaited",
+      "keywords": ["utility types", "partial", "required", "readonly", "pick", "omit", "record", "exclude", "extract", "nonnullable", "returntype", "parameters", "awaited"],
+      "minutes": 15,
+      "file": "lessons/10-utility-types.md"
+    },
+    {
+      "id": "mapped-and-conditional-types",
+      "level": "type-system",
+      "title": "Mapped, Conditional และ Template Literal Types",
+      "summary": "สร้าง type ด้วยการวนทุก key แยก type ตามเงื่อนไขด้วย extends กับ infer และประกอบชื่อด้วย template literal type",
+      "keywords": ["mapped type", "conditional type", "infer", "template literal type", "key remapping", "distributive", "capitalize", "uppercase"],
+      "minutes": 18,
+      "file": "lessons/11-mapped-and-conditional-types.md"
+    },
+    {
+      "id": "classes",
+      "level": "real-world",
+      "title": "Class และ OOP",
+      "summary": "ใส่ type ให้ class เลือกระหว่าง private กับ #private ใช้ readonly, implements, abstract และ override",
+      "keywords": ["class", "constructor", "public", "private", "protected", "#private", "readonly", "implements", "abstract", "override", "static", "parameter properties"],
+      "minutes": 16,
+      "file": "lessons/12-classes.md"
+    },
+    {
+      "id": "decorators",
+      "level": "real-world",
+      "title": "Decorators",
+      "summary": "decorator มาตรฐานของ JavaScript ใน TypeScript เขียน decorator ของ method, class และ field ต่างจาก experimentalDecorators อย่างไร และทำไมต้องแปลงก่อนรัน",
+      "keywords": ["decorator", "decorators", "classmethoddecoratorcontext", "classdecoratorcontext", "addinitializer", "experimentaldecorators", "emitdecoratormetadata", "angular", "nestjs"],
+      "minutes": 15,
+      "file": "lessons/13-decorators.md"
+    },
+    {
+      "id": "modules-and-declarations",
+      "level": "real-world",
+      "title": "Modules และ Declaration Files",
+      "summary": "import และ export แบบมี type ใช้ import type กับ verbatimModuleSyntax เขียนไฟล์ .d.ts และใช้ type ของไลบรารีจาก @types",
+      "keywords": ["module", "import", "export", "import type", "verbatimmodulesyntax", ".d.ts", "declaration file", "declare", "@types", "definitelytyped", "declare module"],
+      "minutes": 17,
+      "file": "lessons/14-modules-and-declarations.md"
+    },
+    {
+      "id": "namespaces-and-declaration-merging",
+      "level": "real-world",
+      "title": "Namespace และ Declaration Merging",
+      "summary": "namespace คืออะไร ทำไมโค้ดใหม่ใช้ ES Modules แทน การรวม interface ที่ชื่อซ้ำ และการเพิ่ม type ให้โค้ดที่มีอยู่แล้ว",
+      "keywords": ["namespace", "declaration merging", "interface merging", "module augmentation", "declare global", "processenv", "ambient"],
+      "minutes": 13,
+      "file": "lessons/15-namespaces-and-declaration-merging.md"
+    },
+    {
+      "id": "dom-and-events",
+      "level": "real-world",
+      "title": "DOM และ Event แบบมี Type",
+      "summary": "เลือก element ให้ได้ type ที่ถูก จัดการค่า null ใส่ type ให้ event และฟอร์ม และสร้าง CustomEvent ที่มี type",
+      "keywords": ["dom", "queryselector", "htmlelement", "htmlinputelement", "event", "mouseevent", "keyboardevent", "customevent", "formdata", "lib dom"],
+      "minutes": 16,
+      "file": "lessons/16-dom-and-events.md"
+    },
+    {
+      "id": "async-and-fetch",
+      "level": "real-world",
+      "title": "Async, Fetch และตรวจข้อมูลตอนรันจริง",
+      "summary": "ใส่ type ให้ Promise และ async function เรียก API ด้วย fetch แล้วตรวจข้อมูลที่ได้ตอนรันจริง เพราะ type ไม่ได้ตรวจอะไรตอนรัน",
+      "keywords": ["promise", "async", "await", "fetch", "response.json", "unknown", "runtime validation", "type guard", "zod", "schema", "abortsignal"],
+      "minutes": 18,
+      "file": "lessons/17-async-and-fetch.md"
+    },
+    {
+      "id": "error-handling",
+      "level": "real-world",
+      "title": "การจัดการ Error แบบปลอดภัย",
+      "summary": "error ใน catch เป็น unknown แยกชนิดด้วย instanceof สร้าง Error class ของตัวเอง และคืนผลแบบ Result แทนการโยน error",
+      "keywords": ["error", "try", "catch", "unknown", "useunknownincatchvariables", "instanceof", "custom error", "cause", "result type", "throw"],
+      "minutes": 15,
+      "file": "lessons/18-error-handling.md"
+    },
+    {
+      "id": "typescript-with-nodejs",
+      "level": "professional",
+      "title": "TypeScript กับ Node.js",
+      "summary": "รันไฟล์ .ts บน Node.js โดยตรง ข้อจำกัดของ type stripping ใส่ type ให้ process.env และ build เป็น JavaScript ก่อนเผยแพร่",
+      "keywords": ["node", "node.js", "type stripping", "erasablesyntaxonly", "@types/node", "process.env", "build", "outdir", "declaration", "watch"],
+      "minutes": 16,
+      "file": "lessons/19-typescript-with-nodejs.md"
+    },
+    {
+      "id": "strict-and-linting",
+      "level": "professional",
+      "title": "ตั้งค่าเข้มงวดและ Lint",
+      "summary": "ตัวเลือก strict แต่ละตัวจับบั๊กอะไร ตัวเลือกเข้มงวดที่ควรเปิดเพิ่ม และตั้ง ESLint กับ typescript-eslint",
+      "keywords": ["strict", "noimplicitany", "strictnullchecks", "nouncheckedindexedaccess", "exactoptionalpropertytypes", "noimplicitoverride", "noimplicitreturns", "eslint", "typescript-eslint", "lint"],
+      "minutes": 15,
+      "file": "lessons/20-strict-and-linting.md"
+    },
+    {
+      "id": "testing",
+      "level": "professional",
+      "title": "การทดสอบโค้ด TypeScript",
+      "summary": "เขียนเทสต์เป็นไฟล์ .ts ด้วย node:test โดยไม่ต้องลงเครื่องมือเพิ่ม ทดสอบ type ด้วย @ts-expect-error และให้ tsc เป็นด่านแรก",
+      "keywords": ["test", "testing", "node:test", "node --test", "assert", "mock", "type test", "@ts-expect-error", "vitest", "ci"],
+      "minutes": 16,
+      "file": "lessons/21-testing.md"
+    },
+    {
+      "id": "migrate-from-javascript",
+      "level": "professional",
+      "title": "ย้ายโปรเจกต์ JavaScript มาเป็น TypeScript",
+      "summary": "ย้ายทีละไฟล์ด้วย allowJs และ checkJs บอก type ในไฟล์ .js ด้วย JSDoc แล้วเปิดความเข้มงวดทีละขั้น",
+      "keywords": ["migration", "migrate", "allowjs", "checkjs", "jsdoc", "@ts-check", "@type", "@param", "@typedef", "incremental"],
+      "minutes": 16,
+      "file": "lessons/22-migrate-from-javascript.md"
+    },
+    {
+      "id": "best-practices",
+      "level": "professional",
+      "title": "Best Practices และ Anti-patterns",
+      "summary": "รูปแบบที่ทำให้ type โกหกอย่าง any, as และ ! ออกแบบ type ให้ตรงกับความจริง branded type และการตั้งชื่อ",
+      "keywords": ["best practices", "anti-patterns", "any", "as", "non-null assertion", "unknown", "branded type", "naming", "readonly", "type design"],
+      "minutes": 15,
+      "file": "lessons/23-best-practices.md"
+    }
+  ]
+}

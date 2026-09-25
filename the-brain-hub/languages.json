@@ -29,11 +29,11 @@
       "name": "TypeScript",
       "badge": "TS",
       "folder": "types-script",
-      "status": "planned",
+      "status": "ready",
       "color": "#3178C6",
       "colorInk": "#FFFFFF",
       "tagline": "JavaScript ที่มีระบบชนิดข้อมูล ต่อยอดหลังเรียน JavaScript จบ",
-      "keywords": ["ts", "type", "ชนิดข้อมูล"]
+      "keywords": ["ts", "type", "ชนิดข้อมูล", "tsc", "typescript 7", "generics", "interface"]
     }
   ]
 }

@@ -5,6 +5,7 @@
  */
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import * as nodeModule from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import vm from 'node:vm';
@@ -44,6 +45,32 @@ function jsSyntaxProblem(code) {
   const result = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
   if (result.status === 0) return null;
   return (result.stderr ?? '').split('\n').find((line) => line.includes('SyntaxError'))?.trim() ?? 'syntax error';
+}
+
+/* ---- TypeScript syntax ---- */
+
+// ใช้ตัวลบ type ที่มากับ Node เอง (22.13 ขึ้นไป) จึงไม่ต้องติดตั้ง typescript เพิ่ม · ตรวจแค่ syntax ส่วน type ต้องตรวจด้วย tsc
+const stripTypes = nodeModule.stripTypeScriptTypes;
+let tsSkipped = 0;
+
+if (stripTypes) {
+  // Node เตือนว่าเป็นฟีเจอร์ทดลองทุกครั้งที่รัน check ทั้งที่เราตั้งใจใช้ เงียบไว้เฉพาะคำเตือนนี้ ตัวอื่นยังแสดงตามปกติ
+  const emitWarning = process.emitWarning;
+  process.emitWarning = (warning, ...rest) => {
+    if (String(warning).includes('stripTypeScriptTypes')) return;
+    emitWarning.call(process, warning, ...rest);
+  };
+}
+
+function tsSyntaxProblem(code) {
+  try {
+    stripTypes(code);
+    return null;
+  } catch (error) {
+    // enum, namespace และ parameter properties เขียนถูก แค่ Node ลบทิ้งเฉย ๆ ไม่ได้ บทเรียนตั้งใจสอนเรื่องนี้
+    if (error?.code === 'ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX') return null;
+    return String(error?.message ?? error).split('\n')[0];
+  }
 }
 
 /* ---- ทะเบียน ---- */
@@ -156,6 +183,14 @@ function checkLesson(path, lesson, lessonFiles, stats) {
       stats.checked += 1;
       const problem = jsSyntaxProblem(block.text);
       if (problem) errors.push(`${where(path, block.line)}: โค้ด JavaScript มี syntax error — ${problem} (ถ้าตั้งใจให้ผิด ใส่ nocheck ต่อท้ายชื่อภาษา)`);
+    } else if (info.id === 'ts') {
+      if (!stripTypes) {
+        tsSkipped += 1;
+        continue;
+      }
+      stats.checked += 1;
+      const problem = tsSyntaxProblem(block.text);
+      if (problem) errors.push(`${where(path, block.line)}: โค้ด TypeScript มี syntax error — ${problem} (ถ้าตั้งใจให้ผิด ใส่ nocheck ต่อท้ายชื่อภาษา)`);
     } else if (block.lang === 'json') {
       stats.checked += 1;
       try {
@@ -255,6 +290,9 @@ try {
     if (hasCourse(language)) checkCourse(language);
   }
   checkGenerated();
+  if (tsSkipped) {
+    warnings.push(`ข้ามการตรวจ syntax ของโค้ด TypeScript ${tsSkipped} ก้อน เพราะ Node ${process.version} ยังไม่มี module.stripTypeScriptTypes (ต้องใช้ Node 22.13 ขึ้นไป)`);
+  }
 } catch (error) {
   errors.push(error.message);
 } finally {

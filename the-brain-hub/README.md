@@ -16,7 +16,7 @@ cd the-brain-hub
 npm start
 ```
 
-เปิด `http://127.0.0.1:8765/` แล้วกด "เข้าสู่ The Brain" (ไม่ต้องติดตั้งอะไรเพิ่ม มีแค่ Node.js 20 ขึ้นไป)
+เปิด `http://127.0.0.1:8765/` แล้วกด "เข้าสู่ The Brain" (ไม่ต้องติดตั้งอะไรเพิ่ม มีแค่ Node.js 20 ขึ้นไป ส่วนการตรวจ syntax ของโค้ด TypeScript ใน `npm run check` ต้องใช้ Node 22.13 ขึ้นไป แนะนำ Node 24 LTS)
 
 ทางเลือกอื่นที่ใช้ได้เหมือนกัน ขอแค่เสิร์ฟจาก **โฟลเดอร์ `develop-knowladge`** (โฟลเดอร์แม่ของ the-brain-hub)
 
@@ -28,15 +28,17 @@ python -m http.server 8765 --directory "C:\Users\loxbit\Desktop\develop-knowladg
 |---|---|
 | Intro (หน้าแรกตอนเข้าเว็บ) | `/the-brain-hub/` |
 | Dashboard The Brain | `/the-brain-hub/dashboard/` |
-| คอร์สของแต่ละภาษา | `/<โฟลเดอร์ภาษา>/` เช่น `/java-script/` |
+| คอร์สของแต่ละภาษา | `/<โฟลเดอร์ภาษา>/` เช่น `/java-script/`, `/types-script/` |
 | บทเรียน | `/java-script/#<id ของบท>` เช่น `/java-script/#scope-and-closures` |
 
 ## ใช้งาน
 
 - **ค้นหา** กด `Ctrl+K` หรือ `/` บน Dashboard ค้นได้ข้ามทุกภาษา ในหน้าคอร์สค้นลึกถึงหัวข้อย่อยในบท
 - **เปลี่ยนบท** ปุ่มลูกศร `←` `→` บนแป้นพิมพ์
+- **หุบรายการบท** กดปุ่ม "หุบรายการบท" บนสุดของเมนูซ้าย หรือกด `[` (ใช้ได้ทั้งแป้นอังกฤษและไทย) เมนูจะเหลือแถบแคบที่มีจุดของแต่ละบท
+  จุดที่อ่านแล้วเป็นเครื่องหมายถูกบนสีของภาษา บทที่เปิดอยู่เรืองแสง ชี้ที่จุดแล้วขึ้นชื่อบท และบทความเลื่อนมาอยู่กลางจอ (บนจอแคบเมนูยังเป็น drawer ตามเดิม)
 - **ความคืบหน้า** กด "ทำเครื่องหมายว่าอ่านจบแล้ว" ท้ายบท ตัวเลขบน Dashboard อัปเดตตาม
-  (เก็บใน `localStorage` ของเบราว์เซอร์นั้นด้วย key `the-brain.progress.v1` ส่วนธีมเก็บที่ `the-brain.theme`)
+  (เก็บใน `localStorage` ของเบราว์เซอร์นั้นด้วย key `the-brain.progress.v1` ธีมเก็บที่ `the-brain.theme` และสถานะหุบเมนูเก็บที่ `the-brain.sidebar`)
 - **ธีม** ตามระบบปฏิบัติการเป็นค่าเริ่มต้น สลับเองได้ที่ปุ่มมุมขวาบน
 
 ## เพิ่มภาษาใหม่
@@ -58,7 +60,7 @@ npm run new-language -- --id python --name Python --badge PY --folder python --c
 2. `npm run sync` แล้ว `npm run check` จนขึ้นว่าผ่าน
 3. แก้ `status` ของภาษานั้นใน `languages.json` เป็น `"ready"` การ์ดจะกดเข้าเรียนได้
 
-ภาษาที่อยู่ในทะเบียนแล้ว (เช่น TypeScript) สั่งแค่ `npm run new-language -- --id typescript` ก็สร้างโฟลเดอร์ตามข้อมูลเดิม
+ภาษาที่อยู่ในทะเบียนแล้วแต่ยังไม่มีโฟลเดอร์ สั่งแค่ `npm run new-language -- --id <id>` ก็สร้างโฟลเดอร์ตามข้อมูลเดิม (คอร์ส TypeScript เริ่มจากคำสั่ง `--id typescript` แบบนี้)
 
 ### สีประจำภาษา
 
@@ -83,7 +85,7 @@ npm run new-language -- --id python --name Python --badge PY --folder python --c
 | `npm start` | เปิดเว็บที่ `http://127.0.0.1:8765/` (`npm start -- --port 8766` เปลี่ยนพอร์ต) |
 | `npm run new-language -- ...` | สร้างชุดเนื้อหาของภาษาใหม่และลงทะเบียน |
 | `npm run sync` | สร้างไฟล์ที่ต้องตรงกับต้นทางใหม่ทั้งหมด: หน้า `index.html` ของทุกภาษา สีประจำภาษา และตารางบทใน README |
-| `npm run check` | ตรวจทะเบียน สี `course.json` บทเรียน ลิงก์ระหว่างบท syntax ของโค้ด JavaScript และไฟล์ที่ต้อง sync |
+| `npm run check` | ตรวจทะเบียน สี `course.json` บทเรียน ลิงก์ระหว่างบท syntax ของโค้ด JavaScript, TypeScript, JSON และไฟล์ที่ต้อง sync (TypeScript ใช้ตัวลบ type ที่มากับ Node 22.13 ขึ้นไป รุ่นที่เก่ากว่าจะข้ามส่วนนี้พร้อมคำเตือน) |
 
 ไฟล์ที่ **ห้ามแก้มือ** เพราะ `sync` จะเขียนทับ: `<ภาษา>/index.html`, `assets/css/generated/language-accents.css`
 และตารางใน README ของแต่ละภาษาที่อยู่ระหว่าง `<!-- brain:lessons:start -->` กับ `<!-- brain:lessons:end -->`

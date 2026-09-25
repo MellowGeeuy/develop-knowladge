@@ -3,6 +3,7 @@ name: brain-hub-content-pack-architecture
 type: decision
 agent: friday
 date: 2026-09-25
+updated: 2026-09-26
 ---
 
 ## Triple
@@ -20,6 +21,8 @@ date: 2026-09-25
 [[brain-hub-content-pack-architecture]] --avoid--> cross-document view transition ระหว่างหน้า เพราะลิงก์เข้าบทมี #fragment ดู [[cross-document-view-transition-hash-error]]
 [[brain-hub-content-pack-architecture]] --documented-in--> `C:\Users\loxbit\Desktop\develop-knowladge\the-brain-hub\README.md` หัวข้อ "เพิ่มภาษาใหม่" · `Updates\Update v.0001.md`
 [[brain-hub-content-pack-architecture]] --avoid--> แก้ไฟล์ที่ generate ด้วยมือ (`<ภาษา>/index.html`, `generated/language-accents.css`, ตารางบทใน README) — sync เขียนทับ และ check จะฟ้อง
+[[brain-hub-content-pack-architecture]] --verified-with--> 2026-09-26 ภาษาจริงภาษาที่สอง: `npm run new-language -- --id typescript` สร้าง `types-script/` จากทะเบียนเดิม เขียน 23 บทแล้วตั้ง `ready` · Dashboard ขึ้น 2 ภาษา 46 บทโดยไม่แก้ CSS/JS ของหน้าคอร์ส
+[[brain-hub-content-pack-architecture]] --produces--> [[course-sidebar-rail-collapse]] และ [[check-typescript-syntax-with-node-strip]] (เพิ่มที่แพลตฟอร์มครั้งเดียว ทุกภาษาได้พร้อมกัน)
 
 ## Note
 
@@ -29,6 +32,9 @@ template แล้ว `sync` กระจายให้ทุกภาษา �
 
 WHY เป็น JSON ไม่ใช่ JS module: `new-language` ต้องอ่านแก้เขียนทะเบียนได้ด้วยเครื่อง
 การแก้ source ของไฟล์ `.js` ด้วยโปรแกรมเปราะกว่ามาก
+
+เปลี่ยนเมื่อ 2026-09-26: เดิม TypeScript อยู่ในทะเบียนเป็น `planned` ยังไม่มีโฟลเดอร์ → ใหม่เป็น `ready` มีคอร์ส 23 บท
+(เหตุผล: Guy สั่ง "เพิ่ม TypeScript ต่อได้เลย" และเลือกขอบเขต 23 บท) · สิ่งที่ต้องแก้ที่แพลตฟอร์มมีแค่ตัวอย่างคำค้นที่เคยเขียนตายตัวเป็นของ JS
 
 ข้อสังเกต: หน้าคอร์สทุกภาษาอยู่ลึกหนึ่งชั้นจากราก template จึงอ้าง `../the-brain-hub/` ตายตัว
 `check` บังคับให้ `folder` เป็นชื่อชั้นเดียวแบบ kebab-case เพื่อไม่ให้ path นี้พัง
