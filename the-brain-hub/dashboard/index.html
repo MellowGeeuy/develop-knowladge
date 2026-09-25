@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · The Brain</title>
+  <meta name="description" content="The Brain Dashboard — เลือกภาษาที่อยากเรียนจากคลังความรู้การพัฒนาโปรแกรม">
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../assets/css/design-system.css">
+  <link rel="stylesheet" href="../assets/css/generated/language-accents.css">
+  <link rel="stylesheet" href="../assets/css/page-specific/dashboard.css">
+  <script type="module" src="../assets/js/pages/dashboard.js"></script>
+</head>
+<body class="dashboard-page">
+  <a class="skip-link" href="#main">ข้ามไปที่เนื้อหา</a>
+  <p class="boot-notice" id="boot-notice" role="alert">
+    หน้านี้ต้องเปิดผ่าน <code>http://</code> เพราะใช้ ES Modules — ในโฟลเดอร์ <code>the-brain-hub</code> สั่ง
+    <code>npm start</code> แล้วเปิด <code>http://127.0.0.1:8765/</code> (รายละเอียดใน <code>the-brain-hub/README.md</code>)
+  </p>
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__start">
+        <a class="brand" href="./" aria-label="The Brain หน้า Dashboard">
+          <span class="brand__mark" aria-hidden="true"><svg class="icon" focusable="false"><use href="../assets/images/icon-sprite.svg#i-brain"></use></svg></span>
+          <span class="brand__name">The Brain</span>
+        </a>
+      </div>
+      <div class="topbar__actions">
+        <button type="button" class="search-trigger" id="search-trigger" aria-haspopup="dialog" aria-keyshortcuts="Control+K">
+          <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="../assets/images/icon-sprite.svg#i-search"></use></svg>
+          <span class="search-trigger__label">ค้นหาทุกภาษา</span>
+          <kbd class="kbd">Ctrl K</kbd>
+        </button>
+        <button type="button" class="btn btn--ghost btn--icon" id="theme-toggle" aria-label="สลับธีม">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/images/icon-sprite.svg#i-moon"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard" id="main">
+    <section class="container dash-hero" aria-labelledby="dash-title">
+      <div class="dash-hero__grid">
+        <div class="hero-tile">
+          <div class="hero-tile__art" id="hero-art" aria-hidden="true"></div>
+          <div class="hero-tile__content">
+            <p class="eyebrow">Develop Knowledge Hub</p>
+            <h1 class="hero-tile__title" id="dash-title">The Brain</h1>
+            <p class="hero-tile__text">คลังความรู้การพัฒนาโปรแกรมของทีม เรียนทีละภาษา ทีละบท ตั้งแต่พื้นฐานจนเขียนได้แบบมืออาชีพ</p>
+            <div class="hero-tile__actions" id="hero-actions"></div>
+          </div>
+        </div>
+
+        <dl class="stat-stack" aria-label="สรุปคลังความรู้">
+          <div class="stat">
+            <dt class="stat__label"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="../assets/images/icon-sprite.svg#i-layers"></use></svg>ภาษาในคลัง</dt>
+            <dd class="stat__value" data-stat="languages">–</dd>
+            <dd class="stat__sub" data-stat="languages-sub">กำลังโหลด</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__label"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="../assets/images/icon-sprite.svg#i-book"></use></svg>บทเรียนทั้งหมด</dt>
+            <dd class="stat__value" data-stat="lessons">–</dd>
+            <dd class="stat__sub" data-stat="lessons-sub">กำลังโหลด</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__label"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="../assets/images/icon-sprite.svg#i-check-circle"></use></svg>อ่านแล้ว</dt>
+            <dd class="stat__value" data-stat="read">–</dd>
+            <dd class="stat__sub" data-stat="read-sub">กำลังโหลด</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="container dash-library" id="library" aria-labelledby="library-title">
+      <div class="section-head">
+        <div>
+          <h2 class="section-head__title" id="library-title">คลังภาษา</h2>
+          <p class="section-head__text">การ์ดแต่ละใบใช้สีจากโลโก้ของภาษานั้น กดการ์ดเพื่อเข้าเรียน</p>
+        </div>
+        <div class="filter-group" id="lang-filter" role="group" aria-label="กรองตามสถานะ">
+          <button type="button" class="chip" data-filter="all" aria-pressed="true">ทั้งหมด <span class="chip__count" data-count="all">0</span></button>
+          <button type="button" class="chip" data-filter="ready" aria-pressed="false">พร้อมเรียน <span class="chip__count" data-count="ready">0</span></button>
+          <button type="button" class="chip" data-filter="planned" aria-pressed="false">กำลังจัดทำ <span class="chip__count" data-count="planned">0</span></button>
+        </div>
+      </div>
+      <div class="lang-grid" id="lang-grid" role="list" aria-label="ภาษาทั้งหมด"></div>
+      <p class="dash-library__empty" id="lang-empty" hidden>ยังไม่มีภาษาในกลุ่มนี้</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>The Brain · คลังความรู้การพัฒนาโปรแกรม</span>
+      <span>ความคืบหน้าการอ่านเก็บไว้ในเบราว์เซอร์นี้เท่านั้น</span>
+    </div>
+  </footer>
+</body>
+</html>

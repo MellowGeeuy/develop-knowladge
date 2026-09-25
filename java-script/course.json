@@ -1,0 +1,242 @@
+{
+  "about": "JavaScript รันได้ทั้งในเบราว์เซอร์และบนเซิร์ฟเวอร์ คอร์สนี้พาไล่ตั้งแต่พื้นฐานของภาษา การจัดการข้อมูล การควบคุมหน้าเว็บและงานแบบ asynchronous ไปจนถึงแนวปฏิบัติของนักพัฒนามืออาชีพ ทุกบทมีตัวอย่างโค้ดที่คัดลอกไปรันได้ทันที",
+  "outcomes": [
+    "อ่านและเขียน JavaScript สมัยใหม่ (ES2015 ขึ้นไป) ได้อย่างมั่นใจ",
+    "เลือกใช้ Array, Object, Map และ Set ให้เหมาะกับงาน",
+    "เข้าใจว่า scope, closure, this และ class ทำงานอย่างไรเบื้องหลัง",
+    "ควบคุมหน้าเว็บด้วย DOM และ Event โดยไม่เปิดช่องโหว่ XSS",
+    "เขียนงาน asynchronous ด้วย Promise, async/await และเรียก API ด้วย fetch",
+    "จัดโปรเจกต์ด้วย ES Modules เขียนเทสต์ และหาบั๊กได้อย่างเป็นระบบ"
+  ],
+  "levels": [
+    {
+      "id": "foundations",
+      "title": "พื้นฐานภาษา",
+      "summary": "รู้จักภาษา ตัวแปร ชนิดข้อมูล เงื่อนไข ลูป ฟังก์ชัน และการจัดการข้อความ ตัวเลข วันที่"
+    },
+    {
+      "id": "data-and-structure",
+      "title": "ข้อมูลและโครงสร้างโค้ด",
+      "summary": "จัดการข้อมูลด้วย Array, Object, Map, Set เข้าใจ scope, closure, class และแบ่งโค้ดเป็น module"
+    },
+    {
+      "id": "browser-and-async",
+      "title": "Browser และงาน Asynchronous",
+      "summary": "ควบคุมหน้าเว็บด้วย DOM และ Event แล้วทำงานกับเวลาและเครือข่ายด้วย Promise และ fetch"
+    },
+    {
+      "id": "professional",
+      "title": "เขียนแบบมืออาชีพ",
+      "summary": "เขียนโค้ดให้อ่านง่าย หาบั๊กเป็น ทดสอบได้ ปลอดภัย และทำงานเร็ว"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "what-is-javascript",
+      "level": "foundations",
+      "title": "JavaScript คืออะไร และรันโค้ดที่ไหน",
+      "summary": "ภาษานี้ทำงานอย่างไร รันในเบราว์เซอร์และ Node.js ได้อย่างไร และเริ่มเขียนโค้ดบรรทัดแรก",
+      "keywords": ["javascript", "ecmascript", "engine", "v8", "node", "node.js", "console", "devtools", "script", "type=module", "use strict"],
+      "minutes": 12,
+      "file": "lessons/01-what-is-javascript.md"
+    },
+    {
+      "id": "variables-and-types",
+      "level": "foundations",
+      "title": "ตัวแปรและชนิดข้อมูล",
+      "summary": "let, const, var ต่างกันอย่างไร ชนิดข้อมูลพื้นฐาน 7 ชนิด และค่าแบบ value กับ reference",
+      "keywords": ["let", "const", "var", "typeof", "primitive", "string", "number", "boolean", "null", "undefined", "symbol", "bigint", "reference", "ตัวแปร", "ชนิดข้อมูล"],
+      "minutes": 15,
+      "file": "lessons/02-variables-and-types.md"
+    },
+    {
+      "id": "operators-and-coercion",
+      "level": "foundations",
+      "title": "ตัวดำเนินการและการแปลงชนิดข้อมูล",
+      "summary": "=== กับ == ต่างกันตรงไหน ค่า truthy/falsy และตัวดำเนินการสมัยใหม่อย่าง ?? และ ?.",
+      "keywords": ["===", "==", "truthy", "falsy", "??", "?.", "optional chaining", "nullish", "coercion", "ternary", "ตัวดำเนินการ", "แปลงชนิด"],
+      "minutes": 15,
+      "file": "lessons/03-operators-and-coercion.md"
+    },
+    {
+      "id": "control-flow",
+      "level": "foundations",
+      "title": "เงื่อนไขและการวนซ้ำ",
+      "summary": "if, switch, ลูปแบบต่าง ๆ และเขียนเงื่อนไขให้อ่านง่ายด้วย guard clause",
+      "keywords": ["if", "else", "switch", "for", "while", "for...of", "for...in", "break", "continue", "guard clause", "ลูป", "เงื่อนไข"],
+      "minutes": 14,
+      "file": "lessons/04-control-flow.md"
+    },
+    {
+      "id": "functions",
+      "level": "foundations",
+      "title": "ฟังก์ชัน",
+      "summary": "ประกาศฟังก์ชันสามแบบ พารามิเตอร์ default และ rest ฟังก์ชันบริสุทธิ์ และฟังก์ชันที่รับฟังก์ชัน",
+      "keywords": ["function", "arrow function", "parameter", "default parameter", "rest", "return", "callback", "higher-order", "pure function", "ฟังก์ชัน"],
+      "minutes": 16,
+      "file": "lessons/05-functions.md"
+    },
+    {
+      "id": "strings-numbers-dates",
+      "level": "foundations",
+      "title": "String, Number และ Date",
+      "summary": "จัดการข้อความ เลขทศนิยมที่คลาดเคลื่อน จัดรูปแบบเงินบาทและวันที่ภาษาไทยด้วย Intl",
+      "keywords": ["string", "template literal", "number", "toFixed", "intl", "numberformat", "datetimeformat", "date", "พ.ศ.", "สกุลเงิน", "ทศนิยม", "วันที่"],
+      "minutes": 16,
+      "file": "lessons/06-strings-numbers-dates.md"
+    },
+    {
+      "id": "arrays",
+      "level": "data-and-structure",
+      "title": "Array",
+      "summary": "เมธอดที่แก้ของเดิมกับที่คืนของใหม่ map, filter, reduce และกับดักของ sort",
+      "keywords": ["array", "map", "filter", "reduce", "find", "some", "every", "sort", "toSorted", "spread", "destructuring", "includes"],
+      "minutes": 16,
+      "file": "lessons/07-arrays.md"
+    },
+    {
+      "id": "objects-map-set-json",
+      "level": "data-and-structure",
+      "title": "Object, Map, Set และ JSON",
+      "summary": "ทำงานกับ object อย่างปลอดภัย คัดลอกแบบตื้นและลึก เลือกใช้ Map/Set และกับดักของ JSON",
+      "keywords": ["object", "map", "set", "json", "destructuring", "spread", "structuredclone", "shallow copy", "deep copy", "object.entries"],
+      "minutes": 18,
+      "file": "lessons/08-objects-map-set-json.md"
+    },
+    {
+      "id": "scope-and-closures",
+      "level": "data-and-structure",
+      "title": "Scope, Hoisting และ Closure",
+      "summary": "ตัวแปรมองเห็นกันได้แค่ไหน ทำไมเรียกใช้ก่อนประกาศแล้วพัง และ closure ใช้เก็บสถานะได้อย่างไร",
+      "keywords": ["scope", "hoisting", "closure", "tdz", "temporal dead zone", "block scope", "lexical scope", "private state"],
+      "minutes": 15,
+      "file": "lessons/09-scope-and-closures.md"
+    },
+    {
+      "id": "this-prototype-class",
+      "level": "data-and-structure",
+      "title": "this, Prototype และ Class",
+      "summary": "กฎของ this ที่คนสับสนบ่อย prototype chain เบื้องหลัง class และฟีเจอร์ของ class สมัยใหม่",
+      "keywords": ["this", "bind", "call", "apply", "prototype", "class", "constructor", "extends", "super", "private field", "static", "getter", "setter"],
+      "minutes": 18,
+      "file": "lessons/10-this-prototype-class.md"
+    },
+    {
+      "id": "modules",
+      "level": "data-and-structure",
+      "title": "ES Modules และการจัดโครงสร้างไฟล์",
+      "summary": "import/export แบ่งโค้ดเป็นไฟล์ จัดชั้น utils, modules, pages และทำไมต้องเปิดผ่าน http",
+      "keywords": ["import", "export", "module", "esm", "es modules", "dynamic import", "import.meta.url", "utils", "modules", "pages", "http server", "cors"],
+      "minutes": 15,
+      "file": "lessons/11-modules.md"
+    },
+    {
+      "id": "error-handling",
+      "level": "data-and-structure",
+      "title": "การจัดการ Error",
+      "summary": "throw, try/catch/finally สร้าง Error ของตัวเอง และไม่กลืน error ทิ้งจนหาบั๊กไม่เจอ",
+      "keywords": ["error", "try", "catch", "finally", "throw", "custom error", "cause", "exception", "typeerror"],
+      "minutes": 13,
+      "file": "lessons/12-error-handling.md"
+    },
+    {
+      "id": "dom",
+      "level": "browser-and-async",
+      "title": "DOM: ควบคุมหน้าเว็บด้วย JavaScript",
+      "summary": "เลือก สร้าง และแก้ element อย่างปลอดภัย textContent กับ innerHTML และ template",
+      "keywords": ["dom", "queryselector", "textcontent", "innerhtml", "createelement", "classlist", "dataset", "template", "documentfragment"],
+      "minutes": 16,
+      "file": "lessons/13-dom.md"
+    },
+    {
+      "id": "events",
+      "level": "browser-and-async",
+      "title": "Event และการตอบสนองผู้ใช้",
+      "summary": "addEventListener, bubbling, event delegation, preventDefault และฟอร์มด้วย FormData",
+      "keywords": ["event", "addeventlistener", "bubbling", "capturing", "event delegation", "preventdefault", "form", "formdata", "keyboard"],
+      "minutes": 15,
+      "file": "lessons/14-events.md"
+    },
+    {
+      "id": "event-loop",
+      "level": "browser-and-async",
+      "title": "Event Loop",
+      "summary": "JavaScript ทำงานทีละอย่างแต่รอหลายเรื่องพร้อมกันได้อย่างไร task กับ microtask และทำไมหน้าเว็บค้าง",
+      "keywords": ["event loop", "call stack", "task queue", "microtask", "settimeout", "queuemicrotask", "blocking", "single thread"],
+      "minutes": 14,
+      "file": "lessons/15-event-loop.md"
+    },
+    {
+      "id": "promises-async-await",
+      "level": "browser-and-async",
+      "title": "Promise และ async/await",
+      "summary": "จาก callback สู่ Promise และ async/await จัดการ error และรันงานพร้อมกันด้วย Promise.all",
+      "keywords": ["promise", "async", "await", "then", "catch", "promise.all", "allsettled", "race", "any", "asynchronous", "callback"],
+      "minutes": 18,
+      "file": "lessons/16-promises-async-await.md"
+    },
+    {
+      "id": "fetch-api",
+      "level": "browser-and-async",
+      "title": "Fetch API: คุยกับ Server",
+      "summary": "ขอและส่งข้อมูล JSON เช็ก response.ok ตั้ง timeout ด้วย AbortController และจัดการสถานะหน้าจอ",
+      "keywords": ["fetch", "api", "http", "json", "response.ok", "abortcontroller", "timeout", "cors", "loading", "post"],
+      "minutes": 15,
+      "file": "lessons/17-fetch-api.md"
+    },
+    {
+      "id": "web-storage",
+      "level": "browser-and-async",
+      "title": "เก็บข้อมูลในเบราว์เซอร์",
+      "summary": "localStorage และ sessionStorage ใช้อย่างไรให้ไม่พัง และอะไรที่ห้ามเก็บเด็ดขาด",
+      "keywords": ["localstorage", "sessionstorage", "storage", "cookie", "indexeddb", "token", "persist"],
+      "minutes": 12,
+      "file": "lessons/18-web-storage.md"
+    },
+    {
+      "id": "clean-code",
+      "level": "professional",
+      "title": "Clean Code และ Naming Convention",
+      "summary": "ตั้งชื่อให้สื่อความหมาย ฟังก์ชันสั้นที่ทำอย่างเดียว early return และคอมเมนต์ที่อธิบายว่าทำไม",
+      "keywords": ["clean code", "naming", "camelcase", "pascalcase", "upper_snake_case", "kebab-case", "early return", "magic number", "comment", "ตั้งชื่อ"],
+      "minutes": 15,
+      "file": "lessons/19-clean-code.md"
+    },
+    {
+      "id": "debugging",
+      "level": "professional",
+      "title": "Debugging ด้วย DevTools",
+      "summary": "ใช้ console ให้เกินกว่า log ตั้ง breakpoint อ่าน stack trace และดูคำขอในแท็บ Network",
+      "keywords": ["debug", "debugging", "devtools", "console.table", "breakpoint", "debugger", "stack trace", "network"],
+      "minutes": 14,
+      "file": "lessons/20-debugging.md"
+    },
+    {
+      "id": "testing",
+      "level": "professional",
+      "title": "การทดสอบด้วย node:test",
+      "summary": "เขียน unit test ด้วยเครื่องมือที่มากับ Node.js แบบไม่ต้องลงไลบรารี และออกแบบโค้ดให้ทดสอบง่าย",
+      "keywords": ["test", "testing", "node:test", "assert", "unit test", "aaa", "mock", "tdd"],
+      "minutes": 16,
+      "file": "lessons/21-testing.md"
+    },
+    {
+      "id": "security-basics",
+      "level": "professional",
+      "title": "Security พื้นฐานสำหรับ Frontend",
+      "summary": "กัน XSS ไม่ใช้ eval ไม่ฝังความลับในโค้ดหน้าเว็บ ตรวจข้อมูลเข้า และดูแล dependency",
+      "keywords": ["security", "xss", "innerhtml", "eval", "csp", "secret", "api key", "npm audit", "validation", "noopener"],
+      "minutes": 15,
+      "file": "lessons/22-security-basics.md"
+    },
+    {
+      "id": "performance",
+      "level": "professional",
+      "title": "Performance พื้นฐาน",
+      "summary": "วัดก่อนแก้ debounce และ throttle เลี่ยง layout thrashing และโหลดเท่าที่จำเป็น",
+      "keywords": ["performance", "debounce", "throttle", "layout thrashing", "lazy loading", "web worker", "performance.now", "reflow"],
+      "minutes": 15,
+      "file": "lessons/23-performance.md"
+    }
+  ]
+}

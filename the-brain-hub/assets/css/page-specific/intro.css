@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Intro (หน้ากาก) — layout เฉพาะหน้า
+   ทุกชิ้นเรียงบนแกนกลางแนวตั้งเส้นเดียว จุดกึ่งกลางแนวนอนของโลโก้ หัวเรื่อง ปุ่ม และแถวภาษาต้องตรงกัน
+   ========================================================================== */
+
+.intro__topbar {
+  position: absolute;
+  inset: 0 0 auto;
+}
+
+.intro {
+  position: relative;
+  isolation: isolate;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--space-20) var(--gutter) var(--space-16);
+  overflow: hidden;
+}
+
+/* แสงหลังโลโก้ ใช้สีของ The Brain เป็นสองวงซ้อนให้ดูมีมิติ */
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(26rem 22rem at 50% 30%, var(--accent-glow), transparent 70%),
+    radial-gradient(36rem 26rem at 50% 42%, var(--accent-alt-glow), transparent 72%);
+}
+
+.intro__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 40rem;
+  text-align: center;
+}
+
+.intro__logo {
+  width: 15rem;
+  aspect-ratio: 6 / 5;
+}
+
+.intro__eyebrow {
+  margin-top: var(--space-8);
+}
+
+.intro__title {
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  line-height: var(--lh-5xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.03em;
+  background: linear-gradient(110deg, var(--color-text) 10%, var(--accent-text) 55%, var(--accent-alt-strong));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.intro__tagline {
+  max-width: 36rem;
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+  line-height: var(--lh-md);
+}
+
+.intro__enter {
+  margin-top: var(--space-10);
+}
+
+.intro__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: var(--lh-xs);
+}
+
+.intro__langs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-12);
+  padding: 0;
+  list-style: none;
+}
+
+.intro__langs[hidden] {
+  display: none;
+}
+
+.intro__lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--control-md);
+  padding-inline: var(--space-1) var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  font-weight: var(--weight-medium);
+}
+
+.intro__lang--planned {
+  border-style: dashed;
+  color: var(--color-text-muted);
+}
+
+.intro__lang-note {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: var(--lh-xs);
+}
+
+@media (max-width: 40rem) {
+  .intro__logo {
+    width: 11rem;
+  }
+
+  .intro__title {
+    font-size: var(--text-4xl);
+    line-height: var(--lh-4xl);
+  }
+}

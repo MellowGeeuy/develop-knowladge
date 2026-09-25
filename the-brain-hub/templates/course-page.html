@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="th" data-language="{{id}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{name}} · The Brain</title>
+  <meta name="description" content="{{description}}">
+  <link rel="icon" href="../the-brain-hub/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../the-brain-hub/assets/css/design-system.css">
+  <link rel="stylesheet" href="../the-brain-hub/assets/css/generated/language-accents.css">
+  <link rel="stylesheet" href="../the-brain-hub/assets/css/page-specific/course.css">
+  <script type="module" src="../the-brain-hub/assets/js/pages/course.js"></script>
+</head>
+<body class="course-page">
+  <a class="skip-link" href="#main">ข้ามไปที่เนื้อหา</a>
+  <p class="boot-notice" id="boot-notice" role="alert">
+    หน้านี้ต้องเปิดผ่าน <code>http://</code> เพราะใช้ ES Modules — ในโฟลเดอร์ <code>the-brain-hub</code> สั่ง
+    <code>npm start</code> แล้วเปิด <code>http://127.0.0.1:8765/</code> (รายละเอียดใน <code>the-brain-hub/README.md</code>)
+  </p>
+
+  <header class="topbar">
+    <div class="container container--wide topbar__inner">
+      <div class="topbar__start">
+        <button type="button" class="btn btn--ghost btn--icon course-menu-toggle" id="course-menu-toggle" aria-controls="course-sidebar" aria-expanded="false" aria-label="เปิดรายการบทเรียน">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="../the-brain-hub/assets/images/icon-sprite.svg#i-menu"></use></svg>
+        </button>
+        <a class="brand" href="../the-brain-hub/dashboard/" aria-label="The Brain กลับไปหน้า Dashboard">
+          <span class="brand__mark" aria-hidden="true"><svg class="icon" focusable="false"><use href="../the-brain-hub/assets/images/icon-sprite.svg#i-brain"></use></svg></span>
+          <span class="brand__name">The Brain</span>
+        </a>
+        <nav class="crumbs" aria-label="ตำแหน่งปัจจุบัน">
+          <span class="crumbs__sep" aria-hidden="true">/</span>
+          <a class="crumbs__item" href="#" id="course-home-link">
+            <span class="lang-badge lang-badge--xs" aria-hidden="true"><span class="lang-badge__text">{{badge}}</span></span>
+            <span>{{name}}</span>
+          </a>
+        </nav>
+      </div>
+      <div class="topbar__actions">
+        <button type="button" class="search-trigger" id="search-trigger" aria-haspopup="dialog" aria-keyshortcuts="Control+K">
+          <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="../the-brain-hub/assets/images/icon-sprite.svg#i-search"></use></svg>
+          <span class="search-trigger__label">ค้นหาในคอร์ส</span>
+          <kbd class="kbd">Ctrl K</kbd>
+        </button>
+        <button type="button" class="btn btn--ghost btn--icon" id="theme-toggle" aria-label="สลับธีม">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="../the-brain-hub/assets/images/icon-sprite.svg#i-moon"></use></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reading-progress" id="reading-progress" hidden><span class="reading-progress__bar"></span></div>
+  </header>
+
+  <div class="container container--wide course-layout" id="course-layout">
+    <nav class="course-sidebar" id="course-sidebar" aria-label="บทเรียน {{name}}"></nav>
+    <main class="course-main" id="main" tabindex="-1"></main>
+    <aside class="course-toc" id="course-toc" aria-label="หัวข้อในบทนี้"></aside>
+  </div>
+  <div class="course-scrim" id="course-scrim" hidden></div>
+
+  <footer class="site-footer">
+    <div class="container container--wide site-footer__inner">
+      <span>The Brain · คลังความรู้การพัฒนาโปรแกรม</span>
+      <span>ความคืบหน้าการอ่านเก็บไว้ในเบราว์เซอร์นี้เท่านั้น</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,154 @@
+/* ==========================================================================
+   Dashboard — layout เฉพาะหน้า
+   hero 8 คอลัมน์ + ตัวเลขสรุป 4 คอลัมน์ บนกริด 12 คอลัมน์ ขอบซ้าย-ขวาตรงกับแถบบนและคลังภาษา
+   การ์ดภาษา ตัวเลข ชิป อยู่ใน design-system.css เพราะใช้ซ้ำได้
+   ========================================================================== */
+
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-16);
+  padding-block: var(--space-10) var(--space-20);
+}
+
+.dash-hero__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.hero-tile {
+  position: relative;
+  isolation: isolate;
+  grid-column: span 8;
+  display: flex;
+  align-items: flex-end;
+  min-height: 22rem;
+  padding: var(--space-10);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.hero-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(30rem 20rem at 100% 0%, var(--accent-glow), transparent 70%),
+    radial-gradient(24rem 18rem at 70% 100%, var(--accent-alt-glow), transparent 70%);
+}
+
+/* ภาพสมองอยู่ขวาของ tile และข้อความกว้างไม่เกิน 28rem สองส่วนจึงไม่ทับกันที่จอ 1440 (hero กว้าง ~790px) */
+.hero-tile__art {
+  position: absolute;
+  top: 50%;
+  right: var(--space-10);
+  z-index: -1;
+  width: 15rem;
+  transform: translateY(-50%);
+}
+
+.hero-tile__content {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  max-width: 28rem;
+}
+
+.hero-tile__title {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  line-height: var(--lh-5xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.03em;
+  background: linear-gradient(110deg, var(--color-text) 15%, var(--accent-text) 60%, var(--accent-alt-strong));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-tile__text {
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+  line-height: var(--lh-md);
+}
+
+.hero-tile__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.hero-tile__actions:empty {
+  display: none;
+}
+
+.stat-stack {
+  grid-column: span 4;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.dash-library {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8);
+}
+
+.dash-library__empty {
+  padding: var(--space-10);
+  border: var(--border-width) dashed var(--color-border-strong);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.dash-library__empty[hidden] {
+  display: none;
+}
+
+@media (max-width: 64rem) {
+  .hero-tile,
+  .stat-stack {
+    grid-column: 1 / -1;
+  }
+
+  .stat-stack {
+    grid-template-rows: none;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 40rem) {
+  .dashboard {
+    gap: var(--space-12);
+    padding-block: var(--space-6) var(--space-16);
+  }
+
+  .hero-tile {
+    min-height: 0;
+    padding: var(--space-6);
+  }
+
+  .hero-tile__art {
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 8rem;
+    opacity: 0.35;
+    transform: none;
+  }
+
+  .hero-tile__title {
+    font-size: var(--text-4xl);
+    line-height: var(--lh-4xl);
+  }
+
+  .stat-stack {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

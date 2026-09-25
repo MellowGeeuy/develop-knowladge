@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Brain · คลังความรู้การพัฒนาโปรแกรม</title>
+  <meta name="description" content="The Brain คลังความรู้การพัฒนาโปรแกรม เลือกภาษา แล้วเรียนทีละบทจนใช้งานได้จริง">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/generated/language-accents.css">
+  <link rel="stylesheet" href="assets/css/page-specific/intro.css">
+  <script type="module" src="assets/js/pages/intro.js"></script>
+</head>
+<body class="intro-page">
+  <a class="skip-link" href="#intro-enter">ข้ามไปที่ปุ่มเข้าสู่ The Brain</a>
+  <p class="boot-notice" id="boot-notice" role="alert">
+    หน้านี้ต้องเปิดผ่าน <code>http://</code> เพราะใช้ ES Modules — ในโฟลเดอร์ <code>the-brain-hub</code> สั่ง
+    <code>npm start</code> แล้วเปิด <code>http://127.0.0.1:8765/</code> (รายละเอียดใน <code>the-brain-hub/README.md</code>)
+  </p>
+
+  <header class="topbar topbar--bare intro__topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__actions">
+        <button type="button" class="btn btn--ghost btn--icon" id="theme-toggle" aria-label="สลับธีม">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/images/icon-sprite.svg#i-moon"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="intro" id="main">
+    <div class="intro__content">
+      <div class="intro__logo" id="intro-logo"></div>
+      <p class="eyebrow intro__eyebrow">Develop Knowledge Hub</p>
+      <h1 class="intro__title">The Brain</h1>
+      <p class="intro__tagline">คลังความรู้การพัฒนาโปรแกรม เลือกภาษา แล้วเรียนทีละบทจนใช้งานได้จริง</p>
+      <a class="btn btn--primary btn--lg intro__enter" id="intro-enter" href="dashboard/">
+        เข้าสู่ The Brain
+        <svg class="icon btn__arrow" aria-hidden="true" focusable="false"><use href="assets/images/icon-sprite.svg#i-arrow-right"></use></svg>
+      </a>
+      <p class="intro__hint">หรือกด <kbd class="kbd">Enter</kbd></p>
+      <ul class="intro__langs" id="intro-langs" aria-label="ภาษาในคลัง" hidden></ul>
+    </div>
+  </main>
+</body>
+</html>

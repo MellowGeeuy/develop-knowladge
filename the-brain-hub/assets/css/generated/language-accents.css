@@ -1,0 +1,35 @@
+/* สร้างอัตโนมัติโดย the-brain-hub/tools/sync.mjs จาก languages.json — ห้ามแก้มือ
+   แก้สีที่ languages.json แล้วรัน npm run sync · สีตัวชี้และตัวอักษรถูกเลื่อนความสว่างให้ผ่านคอนทราสต์ทั้งสองธีม */
+
+/* The Brain · ใช้กับหน้า hub และเป็นค่าเริ่มต้นของทุกหน้า */
+:root {
+  --brand: #6d4aff;
+  --brand-ink: #ffffff;
+  --brand-alt: #22d3ee;
+  --accent: #6d4aff;
+  --accent-ink: #ffffff;
+  --accent-alt: #22d3ee;
+  --accent-strong: light-dark(#6d4aff, #6d4aff);
+  --accent-text: light-dark(#6d4aff, #7b6aff);
+  --accent-alt-strong: light-dark(#009fb5, #22d3ee);
+}
+
+/* JavaScript · สีโลโก้ #F7DF1E */
+[data-language="javascript"] {
+  --accent: #f7df1e;
+  --accent-ink: #000000;
+  --accent-alt: #f5a623;
+  --accent-strong: light-dark(#a16207, #f7df1e);
+  --accent-text: light-dark(#854d0e, #f7df1e);
+  --accent-alt-strong: light-dark(#c68300, #f5a623);
+}
+
+/* TypeScript · สีโลโก้ #3178C6 */
+[data-language="typescript"] {
+  --accent: #3178c6;
+  --accent-ink: #ffffff;
+  --accent-alt: #7b63c0;
+  --accent-strong: light-dark(#3178c6, #3178c6);
+  --accent-text: light-dark(#2a71bf, #3c83d1);
+  --accent-alt-strong: light-dark(#7b63c0, #7b63c0);
+}

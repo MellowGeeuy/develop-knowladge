@@ -1,0 +1,25 @@
+{
+  "about": "คอร์ส {{name}} ของ The Brain เขียนอธิบายสั้น ๆ ว่าคอร์สนี้พาไปถึงไหน เหมาะกับใคร",
+  "outcomes": [
+    "สิ่งที่ผู้เรียนทำได้หลังจบคอร์ส ข้อที่ 1",
+    "สิ่งที่ผู้เรียนทำได้หลังจบคอร์ส ข้อที่ 2"
+  ],
+  "levels": [
+    {
+      "id": "foundations",
+      "title": "พื้นฐาน",
+      "summary": "เริ่มต้นกับ {{name}}"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "introduction",
+      "level": "foundations",
+      "title": "{{name}} คืออะไร",
+      "summary": "รู้จัก {{name}} และเตรียมเครื่องให้พร้อมเขียนโค้ด",
+      "keywords": ["{{id}}"],
+      "minutes": 10,
+      "file": "lessons/01-introduction.md"
+    }
+  ]
+}

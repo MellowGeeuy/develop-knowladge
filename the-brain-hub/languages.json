@@ -1,0 +1,39 @@
+{
+  "$comment": "ทะเบียนภาษาของ The Brain (แหล่งเดียวของการ์ดบน Dashboard) · เพิ่มภาษาด้วย npm run new-language · แก้สีแล้วต้องรัน npm run sync · status: ready = กดเข้าเรียนได้, planned = การ์ดขึ้นกำลังจัดทำ · color คือสีหลักของโลโก้ภาษา (อ้างอิง Simple Icons)",
+  "hub": {
+    "name": "The Brain",
+    "tagline": "คลังความรู้การพัฒนาโปรแกรม เลือกภาษา แล้วเรียนทีละบทจนใช้งานได้จริง",
+    "color": "#6D4AFF",
+    "colorInk": "#FFFFFF",
+    "colorAlt": "#22D3EE"
+  },
+  "languages": [
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "badge": "JS",
+      "folder": "java-script",
+      "status": "ready",
+      "color": "#F7DF1E",
+      "colorInk": "#000000",
+      "colorAlt": "#F5A623",
+      "overrides": {
+        "strongLight": "#A16207",
+        "textLight": "#854D0E"
+      },
+      "tagline": "ภาษาหลักของเว็บ เรียนตั้งแต่พื้นฐานจนเขียนได้แบบมืออาชีพ",
+      "keywords": ["js", "ecmascript", "เว็บ", "frontend", "node"]
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "badge": "TS",
+      "folder": "types-script",
+      "status": "planned",
+      "color": "#3178C6",
+      "colorInk": "#FFFFFF",
+      "tagline": "JavaScript ที่มีระบบชนิดข้อมูล ต่อยอดหลังเรียน JavaScript จบ",
+      "keywords": ["ts", "type", "ชนิดข้อมูล"]
+    }
+  ]
+}
